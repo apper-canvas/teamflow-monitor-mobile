@@ -62,12 +62,8 @@ if (!formData.first_name?.trim()) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    if (!formData.role?.trim()) {
+if (!formData.role?.trim()) {
       newErrors.role = 'Role is required';
-    }
-
-    if (!formData.department?.trim()) {
-      newErrors.department = 'Department is required';
     }
 
     if (!formData.start_date) {
@@ -168,8 +164,8 @@ if (!formData.first_name?.trim()) {
                 onChange={handleChange("role")}
                 error={errors.role}
                 required />
-            <div>
-                <label className="block text-sm font-medium text-surface-700 mb-2">Department <span className="text-error">*</span>
+<div>
+                <label className="block text-sm font-medium text-surface-700 mb-2">Department
                 </label>
                 <select
                     value={formData.department}
