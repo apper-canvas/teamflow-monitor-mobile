@@ -1,24 +1,34 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
-import { employeeService, departmentService } from '@/services';
-import EmployeeForm from '@/components/molecules/EmployeeForm';
-import Button from '@/components/atoms/Button';
-import ApperIcon from '@/components/ApperIcon';
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { departmentService, employeeService } from "@/services";
+import EmployeeForm from "@/components/molecules/EmployeeForm";
+import Button from "@/components/atoms/Button";
+import ApperIcon from "@/components/ApperIcon";
 
 const AddEmployee = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const editId = searchParams.get('edit');
-  
-  const [employee, setEmployee] = useState(null);
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [employee, setEmployee] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    role: '',
+    department: '',
+    startDate: '',
+    photo: '',
+    status: 'active',
+    manager: ''
+  });
+  
+  const editId = searchParams.get('id');
   const isEditing = !!editId;
 
   useEffect(() => {
@@ -41,15 +51,15 @@ const AddEmployee = () => {
     try {
       setInitialLoading(true);
       setError(null);
-      
-      // Try to get employee from location state first
-      if (location.state?.employee) {
-        setEmployee(location.state.employee);
-      } else {
-        const data = await employeeService.getById(editId);
+      const data = await employeeService.getById(editId);
+      if (data) {
         setEmployee(data);
+      } else {
+        setError('Employee not found');
+        toast.error('Employee not found');
       }
     } catch (err) {
+      console.error('Error loading employee:', err);
       setError(err.message || 'Failed to load employee');
       toast.error('Failed to load employee details');
     } finally {
@@ -84,35 +94,29 @@ const AddEmployee = () => {
   if (initialLoading) {
     return (
       <div className="p-6 max-w-4xl mx-auto">
-        <div className="animate-pulse">
-          {/* Header Skeleton */}
-          <div className="flex items-center space-x-4 mb-8">
+    <div className="animate-pulse">
+        {/* Header Skeleton */}
+        <div className="flex items-center space-x-4 mb-8">
             <div className="w-6 h-6 bg-surface-200 rounded"></div>
             <div className="h-8 bg-surface-200 rounded w-48"></div>
-          </div>
-
-          {/* Form Skeleton */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg border border-surface-200 p-6">
-              <div className="h-6 bg-surface-200 rounded w-48 mb-4"></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="h-14 bg-surface-200 rounded"></div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="bg-white rounded-lg border border-surface-200 p-6">
-              <div className="h-6 bg-surface-200 rounded w-48 mb-4"></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="h-14 bg-surface-200 rounded"></div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+        {/* Form Skeleton */}
+        <div className="space-y-6">
+            <div className="bg-white rounded-lg border border-surface-200 p-6">
+                <div className="h-6 bg-surface-200 rounded w-48 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[...Array(6)].map((_, i) => <div key={i} className="h-14 bg-surface-200 rounded"></div>)}
+                </div>
+            </div>
+            <div className="bg-white rounded-lg border border-surface-200 p-6">
+                <div className="h-6 bg-surface-200 rounded w-48 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[...Array(6)].map((_, i) => <div key={i} className="h-14 bg-surface-200 rounded"></div>)}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     );
   }
 
@@ -148,48 +152,53 @@ const AddEmployee = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="p-6 max-w-4xl mx-auto"
-    >
-      {/* Header */}
-      <div className="flex items-center space-x-4 mb-8">
+    initial={{
+        opacity: 0,
+        y: 20
+    }}
+    animate={{
+        opacity: 1,
+        y: 0
+    }}
+    className="p-6 max-w-4xl mx-auto">
+    {/* Header */}
+    <div className="flex items-center space-x-4 mb-8">
         <Button
-          variant="ghost"
-          icon="ArrowLeft"
-          onClick={handleCancel}
-          className="text-surface-600 hover:text-surface-900"
-        >
-          Back
-        </Button>
+            variant="ghost"
+            icon="ArrowLeft"
+            onClick={handleCancel}
+            className="text-surface-600 hover:text-surface-900">Back
+                    </Button>
         <div>
-          <h1 className="text-2xl font-heading font-bold text-surface-900">
-            {isEditing ? 'Edit Employee' : 'Add New Employee'}
-          </h1>
-          <p className="text-surface-600 mt-1">
-            {isEditing 
-              ? 'Update employee information and job details' 
-              : 'Enter employee information and job details'
-            }
-          </p>
+            <h1 className="text-2xl font-heading font-bold text-surface-900">
+                {isEditing ? "Edit Employee" : "Add New Employee"}
+            </h1>
+            <p className="text-surface-600 mt-1">
+                {isEditing ? "Update employee information and job details" : "Enter employee information and job details"}
+            </p>
         </div>
-      </div>
-
-      {/* Form */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-      >
+    </div>
+    {/* Form */}
+    <motion.div
+        initial={{
+            opacity: 0,
+            y: 20
+        }}
+        animate={{
+            opacity: 1,
+            y: 0
+        }}
+        transition={{
+            delay: 0.1
+        }}>
         <EmployeeForm
-          employee={employee}
-          departments={departments}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-          loading={loading}
-        />
-      </motion.div>
+            employee={employee}
+            departments={departments}
+            onSubmit={handleSubmit}
+            onCancel={handleCancel}
+            loading={loading} />
     </motion.div>
+</motion.div>
   );
 };
 
