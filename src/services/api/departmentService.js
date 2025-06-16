@@ -8,14 +8,15 @@ class DepartmentService {
     this.data = [...departmentData];
   }
 
-  async getAll() {
+async getAll() {
     await delay(300);
     // Update employee counts dynamically
     const employees = await employeeService.getAll();
-    return this.data.map(dept => ({
+    const departmentsWithCounts = this.data.map(dept => ({
       ...dept,
-      employeeCount: employees.filter(emp => emp.department === dept.name).length
+      employeeCount: employees.data.filter(emp => emp.department === dept.name).length
     }));
+    return { data: departmentsWithCounts };
   }
 
   async getById(id) {
