@@ -33,11 +33,11 @@ const DepartmentDetail = () => {
         employeeService.getAll()
       ]);
       
-      setDepartment(departmentData);
+setDepartment(departmentData.data);
       
-      // Filter employees by department
-      const departmentEmployees = employeesData.filter(
-        emp => emp.department === departmentData.name
+// Filter employees by department
+      const departmentEmployees = employeesData.data.filter(
+        emp => emp.department === (departmentData.data.Name || departmentData.data.name)
       );
       setEmployees(departmentEmployees);
     } catch (err) {
@@ -64,7 +64,7 @@ const DepartmentDetail = () => {
       await employeeService.delete(deleteDialog.employee.id);
       
       setEmployees(prev => prev.filter(emp => emp.id !== deleteDialog.employee.id));
-      toast.success(`${deleteDialog.employee.firstName} ${deleteDialog.employee.lastName} has been removed`);
+toast.success(`${deleteDialog.employee.first_name} ${deleteDialog.employee.last_name} has been removed`);
       setDeleteDialog({ isOpen: false, employee: null });
     } catch (err) {
       toast.error('Failed to delete employee');
@@ -78,7 +78,7 @@ const DepartmentDetail = () => {
   };
 
   const getDepartmentHead = () => {
-    return employees.find(emp => emp.firstName + ' ' + emp.lastName === department?.head);
+return employees.find(emp => emp.first_name + ' ' + emp.last_name === department?.head);
   };
 
   if (loading) {
@@ -176,8 +176,8 @@ const DepartmentDetail = () => {
           >
             Back
           </Button>
-          <h1 className="text-2xl font-heading font-bold text-surface-900">
-            {department.name} Department
+<h1 className="text-2xl font-heading font-bold text-surface-900">
+            {department.Name || department.name} Department
           </h1>
         </div>
         
@@ -207,8 +207,8 @@ const DepartmentDetail = () => {
 
           {/* Department Details */}
           <div className="flex-1">
-            <h2 className="text-3xl font-heading font-bold text-surface-900 mb-2">
-              {department.name}
+<h2 className="text-3xl font-heading font-bold text-surface-900 mb-2">
+              {department.Name || department.name}
             </h2>
             
             {/* Department Head */}
@@ -328,8 +328,8 @@ const DepartmentDetail = () => {
         onConfirm={handleDeleteConfirm}
         title="Delete Employee"
         message={
-          deleteDialog.employee
-            ? `Are you sure you want to delete ${deleteDialog.employee.firstName} ${deleteDialog.employee.lastName}? This action cannot be undone.`
+deleteDialog.employee
+            ? `Are you sure you want to delete ${deleteDialog.employee.first_name} ${deleteDialog.employee.last_name}? This action cannot be undone.`
             : ''
         }
         confirmText="Delete"

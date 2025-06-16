@@ -26,8 +26,8 @@ const EmployeeDetail = () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await employeeService.getById(id);
-      setEmployee(data);
+const response = await employeeService.getById(id);
+      setEmployee(response.data);
     } catch (err) {
       setError(err.message || 'Failed to load employee details');
       toast.error('Failed to load employee details');
@@ -44,7 +44,7 @@ const EmployeeDetail = () => {
     try {
       setDeleting(true);
       await employeeService.delete(employee.id);
-      toast.success(`${employee.firstName} ${employee.lastName} has been removed`);
+toast.success(`${employee.first_name} ${employee.last_name} has been removed`);
       navigate('/employees');
     } catch (err) {
       toast.error('Failed to delete employee');
@@ -204,9 +204,9 @@ const EmployeeDetail = () => {
           {/* Avatar and Status */}
           <div className="flex flex-col items-center md:items-start mb-6 md:mb-0">
             <Avatar
-              src={employee.photo}
-              alt={`${employee.firstName} ${employee.lastName}`}
-              fallback={`${employee.firstName} ${employee.lastName}`}
+src={employee.photo}
+              alt={`${employee.first_name} ${employee.last_name}`}
+              fallback={`${employee.first_name} ${employee.last_name}`}
               size="2xl"
               status={employee.status}
               className="mb-4"
@@ -219,8 +219,8 @@ const EmployeeDetail = () => {
           {/* Employee Information */}
           <div className="flex-1">
             <div className="mb-6">
-              <h2 className="text-3xl font-heading font-bold text-surface-900 mb-2">
-                {employee.firstName} {employee.lastName}
+<h2 className="text-3xl font-heading font-bold text-surface-900 mb-2">
+                {employee.first_name} {employee.last_name}
               </h2>
               <p className="text-xl text-surface-600">{employee.role}</p>
             </div>
@@ -267,8 +267,8 @@ const EmployeeDetail = () => {
                     <ApperIcon name="Calendar" size={18} className="text-surface-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-surface-500">Start Date</p>
-                    <p className="text-surface-900">{formatDate(employee.startDate)}</p>
+<p className="text-sm font-medium text-surface-500">Start Date</p>
+                    <p className="text-surface-900">{formatDate(employee.start_date)}</p>
                   </div>
                 </div>
 
@@ -277,8 +277,8 @@ const EmployeeDetail = () => {
                     <ApperIcon name="Clock" size={18} className="text-surface-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-surface-500">Tenure</p>
-                    <p className="text-surface-900">{calculateTenure(employee.startDate)}</p>
+<p className="text-sm font-medium text-surface-500">Tenure</p>
+                    <p className="text-surface-900">{calculateTenure(employee.start_date)}</p>
                   </div>
                 </div>
 
@@ -349,7 +349,7 @@ const EmployeeDetail = () => {
         onClose={() => setDeleteDialog(false)}
         onConfirm={handleDelete}
         title="Delete Employee"
-        message={`Are you sure you want to delete ${employee.firstName} ${employee.lastName}? This action cannot be undone.`}
+message={`Are you sure you want to delete ${employee.first_name} ${employee.last_name}? This action cannot be undone.`}
         confirmText="Delete"
         type="danger"
         loading={deleting}

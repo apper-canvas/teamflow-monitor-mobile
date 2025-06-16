@@ -61,9 +61,8 @@ const loadDepartments = async () => {
     try {
       setDeleting(true);
       await departmentService.delete(deleteDialog.department.id);
-      
-      setDepartments(prev => prev.filter(dept => dept.id !== deleteDialog.department.id));
-      toast.success(`${deleteDialog.department.name} department has been removed`);
+setDepartments(prev => prev.filter(dept => dept.id !== deleteDialog.department.id));
+      toast.success(`${deleteDialog.department.Name || deleteDialog.department.name} department has been removed`);
       setDeleteDialog({ isOpen: false, department: null });
     } catch (err) {
       toast.error('Failed to delete department');
@@ -305,8 +304,8 @@ const loadDepartments = async () => {
         onConfirm={handleDeleteConfirm}
         title="Delete Department"
         message={
-          deleteDialog.department
-            ? `Are you sure you want to delete the ${deleteDialog.department.name} department? This action cannot be undone.`
+deleteDialog.department
+            ? `Are you sure you want to delete the ${deleteDialog.department.Name || deleteDialog.department.name} department? This action cannot be undone.`
             : ''
         }
         confirmText="Delete"

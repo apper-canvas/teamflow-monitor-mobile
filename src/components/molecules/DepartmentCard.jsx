@@ -37,8 +37,8 @@ const DepartmentCard = ({ department, onEdit, onDelete, index = 0 }) => {
             <ApperIcon name="Building2" size={24} className="text-primary" />
           </div>
           <div>
-            <h3 className="font-heading font-semibold text-lg text-surface-900">
-              {department.name}
+<h3 className="font-heading font-semibold text-lg text-surface-900">
+              {department.Name || department.name}
             </h3>
             <p className="text-surface-600 text-sm">
               {department.employeeCount} {department.employeeCount === 1 ? 'Employee' : 'Employees'}

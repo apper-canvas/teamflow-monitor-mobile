@@ -12,13 +12,13 @@ const EmployeeForm = ({
   loading = false 
 }) => {
 const [formData, setFormData] = useState({
-    firstName: employee?.firstName || '',
-    lastName: employee?.lastName || '',
+    first_name: employee?.first_name || '',
+    last_name: employee?.last_name || '',
     email: employee?.email || '',
     phone: employee?.phone || '',
     role: employee?.role || '',
     department: employee?.department || '',
-    startDate: employee?.startDate || '',
+    start_date: employee?.start_date || '',
     photo: employee?.photo || '',
     status: employee?.status || 'active',
     manager: employee?.manager || ''
@@ -29,15 +29,15 @@ const [formData, setFormData] = useState({
   
   // Update form data when employee prop changes
   useEffect(() => {
-    if (employee && Object.keys(employee).length > 0) {
+if (employee && Object.keys(employee).length > 0) {
       setFormData({
-        firstName: employee?.firstName || '',
-        lastName: employee?.lastName || '',
+        first_name: employee?.first_name || '',
+        last_name: employee?.last_name || '',
         email: employee?.email || '',
         phone: employee?.phone || '',
         role: employee?.role || '',
         department: employee?.department || '',
-        startDate: employee?.startDate || '',
+        start_date: employee?.start_date || '',
         photo: employee?.photo || '',
         status: employee?.status || 'active',
         manager: employee?.manager || ''
@@ -48,12 +48,12 @@ const [formData, setFormData] = useState({
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName?.trim()) {
-      newErrors.firstName = 'First name is required';
+if (!formData.first_name?.trim()) {
+      newErrors.first_name = 'First name is required';
     }
 
-    if (!formData.lastName?.trim()) {
-      newErrors.lastName = 'Last name is required';
+    if (!formData.last_name?.trim()) {
+      newErrors.last_name = 'Last name is required';
     }
 
     if (!formData.email?.trim()) {
@@ -70,10 +70,9 @@ const [formData, setFormData] = useState({
       newErrors.department = 'Department is required';
     }
 
-    if (!formData.startDate) {
-      newErrors.startDate = 'Start date is required';
+    if (!formData.start_date) {
+      newErrors.start_date = 'Start date is required';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -119,17 +118,17 @@ const [formData, setFormData] = useState({
             <ApperIcon name="User" size={20} className="mr-2 text-primary" />Personal Information
                     </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
+<Input
                 label="First Name"
-                value={formData.firstName}
-                onChange={handleChange("firstName")}
-                error={errors.firstName}
+                value={formData.first_name}
+                onChange={handleChange("first_name")}
+                error={errors.first_name}
                 required />
             <Input
                 label="Last Name"
-                value={formData.lastName}
-                onChange={handleChange("lastName")}
-                error={errors.lastName}
+                value={formData.last_name}
+                onChange={handleChange("last_name")}
+                error={errors.last_name}
                 required />
             <Input
                 label="Email"
@@ -201,12 +200,12 @@ const [formData, setFormData] = useState({
                     {errors.department}
                 </motion.p>}
             </div>
-            <Input
+<Input
                 label="Start Date"
                 type="date"
-                value={formData.startDate}
-                onChange={handleChange("startDate")}
-                error={errors.startDate}
+                value={formData.start_date}
+                onChange={handleChange("start_date")}
+                error={errors.start_date}
                 required />
             <div>
                 <label className="block text-sm font-medium text-surface-700 mb-2">Status

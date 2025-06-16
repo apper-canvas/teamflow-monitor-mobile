@@ -197,15 +197,15 @@ const EmployeeTable = ({ employees, onEdit, onDelete, loading = false }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <Avatar
-                      src={employee.photo}
-                      alt={`${employee.firstName} ${employee.lastName}`}
-                      fallback={`${employee.firstName} ${employee.lastName}`}
+src={employee.photo}
+                      alt={`${employee.first_name} ${employee.last_name}`}
+                      fallback={`${employee.first_name} ${employee.last_name}`}
                       size="md"
                       status={employee.status}
                     />
                     <div className="ml-4">
-                      <div className="text-sm font-medium text-surface-900">
-                        {employee.firstName} {employee.lastName}
+<div className="text-sm font-medium text-surface-900">
+                        {employee.first_name} {employee.last_name}
                       </div>
                       <div className="text-sm text-surface-500">
                         {employee.email}
@@ -224,8 +224,8 @@ const EmployeeTable = ({ employees, onEdit, onDelete, loading = false }) => {
                     {employee.status.replace('-', ' ')}
                   </Badge>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-surface-900">
-                  {formatStartDate(employee.startDate)}
+<td className="px-6 py-4 whitespace-nowrap text-sm text-surface-900">
+                  {formatStartDate(employee.start_date)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end space-x-2">

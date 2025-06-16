@@ -60,9 +60,9 @@ const applyFilters = () => {
     // Apply search filter
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(employee =>
-        employee?.firstName?.toLowerCase().includes(term) ||
-        employee?.lastName?.toLowerCase().includes(term) ||
+filtered = filtered.filter(employee =>
+        employee?.first_name?.toLowerCase().includes(term) ||
+        employee?.last_name?.toLowerCase().includes(term) ||
         employee?.email?.toLowerCase().includes(term) ||
         employee?.role?.toLowerCase().includes(term) ||
         employee?.department?.toLowerCase().includes(term)
@@ -106,7 +106,7 @@ const handleEdit = (employee) => {
       await employeeService.delete(deleteDialog.employee.id);
       
       setEmployees(prev => prev.filter(emp => emp.id !== deleteDialog.employee.id));
-      toast.success(`${deleteDialog.employee.firstName} ${deleteDialog.employee.lastName} has been removed`);
+toast.success(`${deleteDialog.employee.first_name} ${deleteDialog.employee.last_name} has been removed`);
       setDeleteDialog({ isOpen: false, employee: null });
     } catch (err) {
       toast.error('Failed to delete employee');
@@ -118,15 +118,15 @@ const handleEdit = (employee) => {
   const handleExport = () => {
     const csvContent = [
       ['First Name', 'Last Name', 'Email', 'Phone', 'Role', 'Department', 'Status', 'Start Date', 'Manager'].join(','),
-      ...filteredEmployees.map(emp => [
-        emp.firstName,
-        emp.lastName,
+...filteredEmployees.map(emp => [
+        emp.first_name,
+        emp.last_name,
         emp.email,
         emp.phone || '',
         emp.role,
         emp.department,
         emp.status,
-        emp.startDate,
+        emp.start_date,
         emp.manager || ''
       ].join(','))
     ].join('\n');
@@ -243,7 +243,7 @@ const handleEdit = (employee) => {
         })}
         onConfirm={handleDeleteConfirm}
         title="Delete Employee"
-        message={deleteDialog.employee ? `Are you sure you want to delete ${deleteDialog.employee.firstName} ${deleteDialog.employee.lastName}? This action cannot be undone.` : ""}
+message={deleteDialog.employee ? `Are you sure you want to delete ${deleteDialog.employee.first_name} ${deleteDialog.employee.last_name}? This action cannot be undone.` : ""}
         confirmText="Delete"
         type="danger"
         loading={deleting} />

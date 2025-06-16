@@ -15,14 +15,14 @@ const AddEmployee = () => {
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [employee, setEmployee] = useState({
-    firstName: '',
-    lastName: '',
+const [employee, setEmployee] = useState({
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
     role: '',
     department: '',
-    startDate: '',
+    start_date: '',
     photo: '',
     status: 'active',
     manager: ''

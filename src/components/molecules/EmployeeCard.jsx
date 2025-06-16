@@ -42,16 +42,16 @@ const EmployeeCard = ({ employee, onEdit, onDelete, index = 0 }) => {
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <Avatar
+<Avatar
             src={employee.photo}
-            alt={`${employee.firstName} ${employee.lastName}`}
-            fallback={`${employee.firstName} ${employee.lastName}`}
+            alt={`${employee.first_name} ${employee.last_name}`}
+            fallback={`${employee.first_name} ${employee.last_name}`}
             size="lg"
             status={employee.status}
           />
           <div>
-            <h3 className="font-heading font-semibold text-lg text-surface-900">
-              {employee.firstName} {employee.lastName}
+<h3 className="font-heading font-semibold text-lg text-surface-900">
+              {employee.first_name} {employee.last_name}
             </h3>
             <p className="text-surface-600 text-sm">{employee.role}</p>
           </div>
@@ -74,9 +74,9 @@ const EmployeeCard = ({ employee, onEdit, onDelete, index = 0 }) => {
           {employee.email}
         </div>
         
-        <div className="flex items-center text-sm text-surface-600">
+<div className="flex items-center text-sm text-surface-600">
           <ApperIcon name="Calendar" size={16} className="mr-2 text-surface-400" />
-          Started {formatStartDate(employee.startDate)}
+          Started {formatStartDate(employee.start_date)}
         </div>
         
         {employee.manager && (
