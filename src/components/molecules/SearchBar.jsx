@@ -16,20 +16,24 @@ const SearchBar = ({
   const [selectedStatus, setSelectedStatus] = useState('');
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
+    if (!onSearch) return;
+    
     const delayedSearch = setTimeout(() => {
-      onSearch?.(searchTerm);
+      onSearch(searchTerm);
     }, 300);
 
     return () => clearTimeout(delayedSearch);
-  }, [searchTerm, onSearch]);
+  }, [searchTerm]); // Removed onSearch from dependencies to prevent infinite loops
 
   useEffect(() => {
-    onFilterChange?.({
+    if (!onFilterChange) return;
+    
+    onFilterChange({
       department: selectedDepartment,
       status: selectedStatus
     });
-  }, [selectedDepartment, selectedStatus, onFilterChange]);
+  }, [selectedDepartment, selectedStatus]); // Removed onFilterChange from dependencies to prevent infinite loops
 
   const clearFilters = () => {
     setSearchTerm('');
