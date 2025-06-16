@@ -65,11 +65,11 @@ const EmployeeGrid = ({ employees, onEdit, onDelete, loading = false }) => {
     );
   }
 
-  return (
+return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {employees.map((employee, index) => (
         <EmployeeCard
-          key={employee.id}
+          key={employee.id || index}
           employee={employee}
           onEdit={onEdit}
           onDelete={onDelete}
