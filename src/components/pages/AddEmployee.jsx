@@ -28,7 +28,7 @@ const AddEmployee = () => {
     manager: ''
   });
   
-  const editId = searchParams.get('id');
+const editId = searchParams.get('edit');
   const isEditing = !!editId;
 
   useEffect(() => {
