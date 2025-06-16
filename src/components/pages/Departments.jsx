@@ -18,15 +18,28 @@ const Departments = () => {
     loadDepartments();
   }, []);
 
-  const loadDepartments = async () => {
+const loadDepartments = async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await departmentService.getAll();
-      setDepartments(data);
+      const response = await departmentService.getAll();
+      
+      // Handle wrapped response format and ensure we have an array
+      const departmentsData = response?.data || response || [];
+      
+      // Validate that we have an array before setting state
+      if (Array.isArray(departmentsData)) {
+        setDepartments(departmentsData);
+      } else {
+        console.warn('Departments data is not an array:', departmentsData);
+        setDepartments([]);
+        setError('Invalid data format received');
+      }
     } catch (err) {
+      console.error('Error loading departments:', err);
       setError(err.message || 'Failed to load departments');
       toast.error('Failed to load departments');
+      setDepartments([]); // Ensure departments is always an array
     } finally {
       setLoading(false);
     }
