@@ -7,26 +7,26 @@ class EmployeeService {
     this.data = [...employeeData];
   }
 
-  async getAll() {
+async getAll() {
     await delay(300);
-    return [...this.data];
+    return { data: [...this.data] };
   }
 
-  async getById(id) {
+async getById(id) {
     await delay(250);
     const employee = this.data.find(emp => emp.id === id);
     if (!employee) {
       throw new Error('Employee not found');
     }
-    return { ...employee };
+    return { data: { ...employee } };
   }
 
-  async getByDepartment(departmentId) {
+async getByDepartment(departmentId) {
     await delay(300);
-    return this.data.filter(emp => emp.department === departmentId).map(emp => ({ ...emp }));
+    return { data: this.data.filter(emp => emp.department === departmentId).map(emp => ({ ...emp })) };
   }
 
-  async create(employeeData) {
+async create(employeeData) {
     await delay(400);
     const newEmployee = {
       ...employeeData,
@@ -34,10 +34,10 @@ class EmployeeService {
       status: employeeData.status || 'active'
     };
     this.data.push(newEmployee);
-    return { ...newEmployee };
+    return { data: { ...newEmployee } };
   }
 
-  async update(id, updates) {
+async update(id, updates) {
     await delay(350);
     const index = this.data.findIndex(emp => emp.id === id);
     if (index === -1) {
@@ -45,10 +45,10 @@ class EmployeeService {
     }
     
     this.data[index] = { ...this.data[index], ...updates };
-    return { ...this.data[index] };
+    return { data: { ...this.data[index] } };
   }
 
-  async delete(id) {
+async delete(id) {
     await delay(300);
     const index = this.data.findIndex(emp => emp.id === id);
     if (index === -1) {
@@ -56,13 +56,13 @@ class EmployeeService {
     }
     
     const deleted = this.data.splice(index, 1)[0];
-    return { ...deleted };
+    return { data: { ...deleted } };
   }
 
-  async search(query) {
+async search(query) {
     await delay(200);
     const searchTerm = query.toLowerCase();
-    return this.data
+    return { data: this.data
       .filter(emp => 
         emp.firstName.toLowerCase().includes(searchTerm) ||
         emp.lastName.toLowerCase().includes(searchTerm) ||
@@ -70,14 +70,14 @@ class EmployeeService {
         emp.role.toLowerCase().includes(searchTerm) ||
         emp.department.toLowerCase().includes(searchTerm)
       )
-      .map(emp => ({ ...emp }));
+      .map(emp => ({ ...emp })) };
   }
 
-  async filterByStatus(status) {
+async filterByStatus(status) {
     await delay(200);
-    return this.data
+    return { data: this.data
       .filter(emp => emp.status === status)
-      .map(emp => ({ ...emp }));
+      .map(emp => ({ ...emp })) };
   }
 }
 
