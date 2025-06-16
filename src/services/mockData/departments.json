@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Engineering",
+    "head": "David Rodriguez",
+    "employeeCount": 3,
+    "description": "Responsible for product development, technical architecture, and software engineering across all company initiatives."
+  },
+  {
+    "id": "2",
+    "name": "Design",
+    "head": "Lisa Wong",
+    "employeeCount": 2,
+    "description": "Creates user-centered designs, manages brand identity, and ensures exceptional user experiences across all products."
+  },
+  {
+    "id": "3",
+    "name": "Marketing",
+    "head": "Amanda Foster",
+    "employeeCount": 2,
+    "description": "Drives brand awareness, manages digital campaigns, and develops strategic marketing initiatives to grow our market presence."
+  },
+  {
+    "id": "4",
+    "name": "Sales",
+    "head": "Kevin Thompson",
+    "employeeCount": 2,
+    "description": "Focuses on revenue generation, client relationships, and expanding our customer base through strategic sales initiatives."
+  },
+  {
+    "id": "5",
+    "name": "Executive",
+    "head": "Jennifer Taylor",
+    "employeeCount": 1,
+    "description": "Provides strategic leadership, sets company direction, and ensures organizational success across all departments."
+  },
+  {
+    "id": "6",
+    "name": "Analytics",
+    "head": "Rachel Green",
+    "employeeCount": 2,
+    "description": "Analyzes business data, provides insights for decision-making, and supports data-driven strategies across all departments."
+  }
+]
