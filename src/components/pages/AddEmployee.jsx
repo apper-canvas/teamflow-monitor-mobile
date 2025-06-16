@@ -48,13 +48,13 @@ try {
     }
   };
 
-  const loadEmployee = async () => {
+const loadEmployee = async () => {
     try {
       setInitialLoading(true);
       setError(null);
-      const data = await employeeService.getById(editId);
-      if (data) {
-        setEmployee(data);
+      const response = await employeeService.getById(editId);
+      if (response && response.data) {
+        setEmployee(response.data);
       } else {
         setError('Employee not found');
         toast.error('Employee not found');
