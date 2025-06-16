@@ -39,11 +39,12 @@ const editId = searchParams.get('edit');
   }, [editId]);
 
   const loadDepartments = async () => {
-    try {
-      const data = await departmentService.getAll();
-      setDepartments(data);
+try {
+      const response = await departmentService.getAll();
+      setDepartments(response.data || []);
     } catch (err) {
       toast.error('Failed to load departments');
+      setDepartments([]);
     }
   };
 

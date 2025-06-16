@@ -26,11 +26,13 @@ async getAll() {
       throw new Error('Department not found');
     }
     
-    // Get employee count
+// Get employee count
     const employees = await employeeService.getAll();
-    return {
-      ...department,
-      employeeCount: employees.filter(emp => emp.department === department.name).length
+return {
+      data: {
+        ...department,
+        employeeCount: employees.data.filter(emp => emp.department === department.name).length
+      }
     };
   }
 

@@ -179,11 +179,13 @@ const [formData, setFormData] = useState({
                 w-full px-3 py-3 border rounded-md transition-all duration-200 bg-white text-surface-900
                 ${errors.department ? "border-error focus:border-error focus:ring-error" : "border-surface-300 focus:border-primary focus:ring-primary"}
                 focus:outline-none focus:ring-2 focus:ring-opacity-20
-              `}>
+`}>
                     <option value="">Select Department</option>
-                    {departments.map(dept => <option key={dept.id || dept.name} value={dept.name}>
-                        {dept.name}
-                    </option>)}
+                    {Array.isArray(departments) ? departments.map(dept => (
+                        <option key={dept.id || dept.name} value={dept.name}>
+                            {dept.name}
+                        </option>
+                    )) : null}
                 </select>
                 {errors.department && <motion.p
                     initial={{
