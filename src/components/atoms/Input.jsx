@@ -13,6 +13,7 @@ const Input = ({
   disabled = false,
   required = false,
   className = '',
+  defaultValue, // Extract defaultValue to prevent it from being spread
   ...props
 }) => {
   const [focused, setFocused] = useState(false);
